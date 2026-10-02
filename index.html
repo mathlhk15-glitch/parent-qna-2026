@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>학부모님이 물으셨습니다. 학교가 답합니다.</title>
+<style>
+  :root{
+    --bg:#f3f9fd; --paper:#ffffff; --ink:#1f2a44; --sub:#56627a; --line:#dfe8f0;
+    --navy:#1f3a68; --blue:#2f7fd8; --green:#2f9a55; --orange:#f0a020; --pink:#e5577f;
+    --blue-bg:#e8f3fd; --green-bg:#eaf6ec; --orange-bg:#fff5e1; --pink-bg:#fdecef; --violet-bg:#f1edfb; --violet:#7a5bd0;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{margin:0;padding-top:env(safe-area-inset-top,0);padding-bottom:env(safe-area-inset-bottom,0);background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif;font-size:17px;line-height:1.75;word-break:keep-all}
+  .wrap{max-width:820px;margin:0 auto;padding:0 16px 64px}
+
+  header.hero{background:linear-gradient(180deg,#cfe8fb 0%,#eaf6ff 60%,var(--bg) 100%);padding:40px 16px 28px;text-align:center}
+  .hero h1{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-weight:400;font-size:clamp(30px,7vw,46px);line-height:1.25;margin:0;color:var(--navy)}
+  .hero h1 .l2{display:block}
+  .hero h1 .b{color:var(--blue)} .hero h1 .g{color:var(--green)}
+  .hero p{margin:14px auto 0;max-width:600px;color:var(--sub);font-size:16px}
+
+  nav.cats{position:sticky;top:0;z-index:5;background:rgba(243,249,253,.94);backdrop-filter:blur(6px);padding:10px 0;margin:8px 0 6px;border-bottom:1px solid var(--line)}
+  .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:0 2px}
+  .chip{flex:0 0 auto;white-space:nowrap;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:7px 14px;font:500 15px -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;cursor:pointer}
+  .chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+
+  .tools{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:14px 0 4px;flex-wrap:wrap}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;font-size:14px;color:var(--sub)}
+  .btn{border:1.5px solid var(--line);background:var(--paper);border-radius:10px;padding:6px 12px;font:500 14px -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:var(--ink);cursor:pointer}
+
+  section.cat{margin-top:26px}
+  .cat-h{display:flex;align-items:center;gap:10px;margin:0 0 12px}
+  .cat-h .ico{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:20px;flex:0 0 auto}
+  .cat-h h2{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-weight:400;font-size:25px;margin:0}
+  .cat-h small{color:var(--sub);font-size:14px;margin-left:auto}
+
+  details.qa{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;margin:0 0 12px;overflow:hidden;box-shadow:0 2px 8px rgba(31,58,104,.05)}
+  details.qa[open]{border-color:var(--accent,var(--blue))}
+  details.qa summary{list-style:none;cursor:pointer;padding:16px 18px 14px;position:relative}
+  details.qa summary::-webkit-details-marker{display:none}
+  .qline{display:flex;gap:10px;align-items:flex-start}
+  .qmark{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--accent,var(--blue));color:#fff;display:grid;place-items:center;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-size:17px;margin-top:1px}
+  .qtext{font-weight:700;font-size:17.5px;line-height:1.6}
+  .key{margin:10px 0 0 40px;background:var(--tint,var(--blue-bg));border-radius:12px;padding:10px 14px;font-size:16px}
+  .key b{color:var(--accent,var(--blue));margin-right:6px}
+  .row{display:flex;justify-content:space-between;align-items:center;margin:10px 0 0 40px;gap:8px}
+  .more{font-size:14.5px;color:var(--accent,var(--blue));font-weight:700}
+  details[open] .more .open-t{display:none} details:not([open]) .more .close-t{display:none}
+  .badge{font-size:13px;font-weight:700;border-radius:999px;padding:2px 10px;white-space:nowrap}
+  .s-run{background:#e3f4e8;color:#1f7a3f}
+  .s-plan{background:#e4effc;color:#1d5fb0}
+  .s-review{background:#fdf0da;color:#9a5d00}
+  .answer{padding:4px 18px 18px 58px;border-top:1px dashed var(--line);margin-top:4px}
+  .answer p{margin:12px 0 0}
+  .answer .note{font-size:14.5px;color:var(--sub);background:#f6f8fb;border-radius:10px;padding:8px 12px}
+  .answer ul{margin:10px 0 0;padding-left:20px}
+  .upd{display:block;margin-top:12px;font-size:13px;color:var(--sub)}
+
+  .box{background:var(--paper);border:1.5px solid var(--line);border-radius:18px;padding:18px 20px;margin-top:30px}
+  .box h3{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-weight:400;font-size:21px;margin:0 0 6px;color:var(--navy)}
+  .box p,.box li{font-size:15.5px}
+  .box ul{padding-left:20px;margin:6px 0 0}
+  footer{text-align:center;color:var(--sub);font-size:14px;margin-top:30px}
+  .top{position:fixed;right:16px;bottom:18px;width:46px;height:46px;border-radius:50%;border:none;background:var(--navy);color:#fff;font-size:20px;box-shadow:0 4px 12px rgba(0,0,0,.18);cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s}
+  .top.show{opacity:1;pointer-events:auto}
+
+  @media (max-width:520px){
+    body{font-size:16.5px}
+    .key,.row{margin-left:0}
+    .answer{padding:4px 16px 16px}
+    .cat-h small{display:none}
+    .chips{gap:6px}
+    .chip{padding:6px 11px;font-size:14px}
+  }
+  @media print{
+    nav.cats,.tools,.top{display:none!important}
+    body{background:#fff}
+    details.qa{break-inside:avoid;box-shadow:none}
+    .answer{display:block!important}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>학부모님이 물으셨습니다.<span class="l2"><span class="b">학교</span>가 <span class="g">답</span>합니다.</span></h1>
+  <p>학부모님께서 보내주신 사전 질문 17개에 대한 학교의 답변과 앞으로의 계획을 분야별로 정리했습니다. 질문을 누르시면 자세한 답변을 보실 수 있습니다.</p>
+</header>
+
+<div class="wrap">
+  <nav class="cats" aria-label="분야 선택"><div class="chips" id="chips"><button class="chip" type="button" data-cat="all" aria-pressed="true">전체 보기 17</button><button class="chip" type="button" data-cat="facility" aria-pressed="false">🏫 시설·교육환경 2</button><button class="chip" type="button" data-cat="life" aria-pressed="false">🎒 학교생활·체험 6</button><button class="chip" type="button" data-cat="credit" aria-pressed="false">📚 선택과목·고교학점제 3</button><button class="chip" type="button" data-cat="career" aria-pressed="false">🌱 진로탐구·성장 2</button><button class="chip" type="button" data-cat="admission" aria-pressed="false">🎯 진학·수능 4</button></div></nav>
+
+  <noscript><p style="margin:12px 0;color:#56627a;font-size:14px">이 보기 환경에서는 필터 버튼이 작동하지 않을 수 있어 모든 질문과 답변을 펼쳐서 표시합니다.</p></noscript>
+  <div class="tools">
+    <div class="legend">
+      <span><span class="badge s-run">운영 중</span> 현재 하고 있음</span>
+      <span><span class="badge s-plan">예정</span> 일정이 정해짐</span>
+      <span><span class="badge s-review">검토 중</span> 협의·건의 단계</span>
+    </div>
+    <div>
+      <button class="btn" id="toggleAll" type="button">모두 펼치기</button>
+      <button class="btn" type="button" onclick="window.print()">인쇄</button>
+    </div>
+  </div>
+
+  <main id="list"><section class="cat" data-cat="facility" id="cat-facility">
+    <div class="cat-h"><span class="ico" style="background:var(--blue-bg)">🏫</span><h2>시설·교육환경</h2><small>질문 2개</small></div>
+    <details class="qa" open style="--accent:var(--blue);--tint:var(--blue-bg)">
+        <summary>
+          <div class="qline"><span class="qmark">Q</span><span class="qtext">학교 시설, 화장실이나 기숙사 등 환경 개선 계획이 궁금합니다. 올해는 교실에 모기도 많았다고 들었습니다. 그린스마트 사업 등은 계획에 없을까요?</span></div>
+          <div class="key"><b>핵심답변</b>이번 겨울방학 시작일부터 2월까지 본관 화장실 개선, 교실 복도 창문·출입문 교체 공사를 진행합니다. 방역은 연 5회 실시하며 필요하면 추가로 실시합니다.</div>
+          <div class="row"><span class="more"><span class="open-t">학교 답변 자세히 보기 ▼</span><span class="close-t">접기 ▲</span></span><span class="badge s-plan">예정</span></div>
+        </summary>
+        <div class="answer"><p>학생들을 위한 시설 보완에 많이 신경 쓰려 노력하고 있습니다. 교육청 사업을 적극 활용하려 하고 있으며, 이번 겨울방학 시작일부터 2월까지 <b>본관 화장실 개선공사, 교실 복도 창문 교체, 교실 출입문 교체</b>를 진행합니다. 학생들의 편의를 높이기 위해 학교 차원에서 최선을 다하겠습니다.</p><p>방역은 <b>연 5회</b> 실시합니다. 방충망을 점검하고, 추가 방역이 필요하면 추가로 실시하도록 하겠습니다.</p><p>기숙사 시설은 예산이 많이 드는 사업이라 교육청에 지속적으로 요구하고 있습니다.</p><p>그린스마트 사업은 건물이 지어진 지 40년이 지나야 신청할 수 있는데, 우리 학교는 내년부터 이 자격을 갖추게 됩니다. 이에 내년부터 교육청에 그린스마트 사업 신청을 지속적으로 추진할 예정입니다.</p><p><span class='note'>※ 공사 일정과 교육청 사업은 예산·교육청 일정에 따라 달라질 수 있으며, 확정되면 따로 안내드립니다.</span></p></div>
+      </details><details class="qa" open style="--accent:var(--blue);--tint:var(--blue-bg)">
+        <summary>
+          <div class="qline"><span class="qmark">Q</span><span class="qtext">1인 독서실이 갖추어지면 좋겠습니다. 그리고 도서관 독서실의 백열등이 너무 어둡다고 합니다.</span></div>
+          <div class="key"><b>핵심답변</b>도서관 독서실 조명은 교체하겠습니다. 1학년 1인 학습공간은 예산 등을 고려해 학교 구성원과 함께 검토하겠습니다.</div>
+          <div class="row"><span class="more"><span class="open-t">학교 답변 자세히 보기 ▼</span><span class="close-t">접기 ▲</span></span><span class="badge s-review">검토 중</span></div>
+        </summary>
+        <div class="answer"><p>2학년은 독서대가 있는 학습실이 있지만, 1학년은 아직 구축되지 않았습니다. 예산 등의 문제가 있어 학교 구성원들과 충분히 고민하고, 실현할 수 있도록 노력하겠습니다.</p><p>건의해 주신 <b>독서실 백열등은 교체</b>하겠습니다. 학생들이 불편을 느끼는 부분이 있다면 학교로 알려 주세요. 잘 살피고 대응하겠습니다.</p></div>
+      </details>
+  </section><section class="cat" data-cat="life" id="cat-life">
+    <div class="cat-h"><span class="ico" style="background:var(--pink-bg)">🎒</span><h2>학교생활·체험</h2><small>질문 6개</small></div>
+    <details class="qa" open style="--accent:var(--pink);--tint:var(--pink-bg)">
+        <summary>
+          <div class="qline"><span class="qmark">Q</span><span class="qtext">2학년 수학여행이 해외에서 국내로 변경되어 다소 아쉽습니다. 1학년 서울투어 및 2학년 수학여행에 대해 안내 부탁드립니다.</span></div>
+          <div class="key"><b>핵심답변</b>유가와 물가 상승으로 비용이 크게 올라 국내로 변경했습니다. 1·2학년 모두 세부 일정은 자료로 만들어 따로 배포하겠습니다.</div>
+          <div class="row"><span class="more"><span class="open-t">학교 답변 자세히 보기 ▼</span><span class="close-t">접기 ▲</span></span><span class="badge s-plan">예정</span></div>
+        </summary>
+        <div class="answer"><p>유가와 물가 상승으로 비용이 많이 올라 해외로 계획했던 수학여행을 진행하기 어려워져 국내로 변경하였습니다. 이 점 송구스럽게 생각합니다.</p><p>서울에서 더 많은 것을 경험하고 체험하며 학생들의 식견을 넓히고 학습 의욕을 높일 수 있도록 지도하겠습니다. 1·2학년 담임교사와 안전생활부 교사, 비담임교사, 교장선생님까지 학생들을 인솔할 예정이며, 안전하고 의미 있는 서울투어와 수학여행이 되도록 만반의 준비를 하겠습니다.</p><p><b>1학년 서울투어 일정(계획)</b><ul><li>첫째 날: 학교 → 서울 소재 대학·문화 랜드마크·유적지 자유 탐방 → 숙소</li><li>둘째 날: 숙소 → 에버랜드 → 숙소</li><li>셋째 날: 숙소 → 경기도박물관 → 학교</li></ul></p><p>1·2학년의 자세한 일정은 자료로 만들어 배포하겠습니다.</p></div>
+      </details><details class="qa" open style="--accent:var(--pink);--tint:var(--pink-bg)">
+        <summary>
+          <div class="qline"><span class="qmark">Q</span><span class="qtext">야간자율학습을 자율적으로 진행하고, 이를 통해 면학 분위기가 잘 잡힐 수 있도록 도와주시면 좋겠습니다.</span></div>
+          <div class="key"><b>핵심답변</b>야간자율학습은 상담 후 자율 참여로 운영하며, 학년 담임선생님 2명이 매일 당번으로 자습을 지도합니다.</div>
+          <div class="row"><span class="more"><span class="open-t">학교 답변 자세히 보기 ▼</span><span class="close-t">접기 ▲</span></span><span class="badge s-run">운영 중</span></div>
+        </summary>
+        <div class="answer"><p>담임선생님들께서 학생들에게 야간자율학습 참여를 권하기는 하지만, 학원을 다니거나 학생이 원하지 않으면 상담 후 자율적으로 진행하고 있습니다.</p><p>학년 담임선생님들께서는 <b>매일 2명씩 당번</b>을 정해 학생들의 자습을 감독하며 면학 분위기 조성을 위해 노력하고 있습니다. 학부모님들께서도 자녀들이 학교에서 학업에 전념할 수 있도록 많은 응원과 관심 부탁드립니다.</p></div>
+      </details><details class="qa" open style="--accent:var(--pink);--tint:var(--pink-bg)">
+        <summary>
+          <div class="qline"><span class="qmark">Q</span><span class="qtext">토요일 자습실 운영에 대해서 자녀가 매우 만족한다고 합니다.</span></div>
+          <div class="key"><b>핵심답변</b>감사합니다. 학생들이 자발적으로 참여하며 학습 분위기가 잘 만들어지고 있습니다. 앞으로도 안정적으로 운영하겠습니다.</div>
+          <div class="row"><span class="more"><span class="open-t">학교 답변 자세히 보기 ▼</span><span class="close-t">접기 ▲</span></span><span class="badge s-run">운영 중</span></div>
+        </summary>
+        <div class="answer"><p>학교를 믿고 자녀들을 토요일 자습실에 참여시켜 주셔서 감사드립니다. 담임선생님들과 학생들의 마음이 잘 맞아 학습 분위기가 잘 만들어지고, 토요일 오전 자율학습에도 자발적으로 참여하는 분위기가 되어 무척 대견합니다.</p><p>'스카보다 더 집중이 잘 된다', '토요일 오후 몇 시까지 자습할 수 있냐'고 물어봐 주어 담임선생님들께서도 뿌듯해하십니다. 점차 분위기가 좋아지고 학생들 스스로 시너지를 낼 수 있도록 더 노력하겠습니다.</p></div>
+      </details><details class="qa" open style="--accent:var(--pink);--tint:var(--pink-bg)">
+        <summary>
+          <div class="qline"><span class="qmark">Q</span><span class="qtext">학생들의 학업 스트레스가 큰데, 이를 해소할 수 있는 행사가 많았으면 합니다.</span></div>
+          <div class="key"><b>핵심답변</b>서울문화체험, 체육대회, 합동 버스킹, 상담실 스트레스 해소 프로그램 등을 운영하고 있으며, 학생회 의견과 만족도 조사를 다음 행사에 반영하겠습니다.</div>
+          <div class="row"><span class="more"><span class="open-t">학교 답변 자세히 보기 ▼</span><span class="close-t">접기 ▲</span></span><span class="badge s-run">운영 중</span></div>
+        </summary>
+        <div class="answer"><p>학생들의 스트레스를 해소할 행사가 의미 있고 중요하다는 점을 잘 알고 있습니다. 다만 학업과 행사의 균형을 잡기가 쉽지 않은 것도 사실입니다.</p><p>본교에서는 올해 다음과 같은 행사를 계획·실시하였습니다.<ul><li>1학년 서울문화체험, 수학여행</li><li>농촌봉사활동, 진로교육원 체험</li><li>올림픽공원 체육대회</li><li>창원경일여고와의 합동 버스킹 (올해 학기당 1회, 총 2회)</li><li>상담실 주관 '오감만족 스트레스 뿌셔'</li></ul></p><p>앞으로 학생회를 더 활용해 학생들의 의견을 반영하고, <b>행사 만족도 조사</b>를 실시해 다음 행사에 반영하여 학생들이 즐거운 학교가 되도록 하겠습니다.</p></div>
+      </details><details class="qa" open style="--accent:var(--pink);--tint:var(--pink-bg)">
+        <summary>
+          <div class="qline"><span class="qmark">Q</span><span class="qtext">학생들이 학교생활 중 느끼는 불편이나 건의사항을 자유롭게 전달하고 소통할 수 있는 기회가 꾸준히 이어졌으면 좋겠습니다.</span></div>
+          <div class="key"><b>핵심답변</b>2학년 교무실 앞 '질문게시판'에 학생이 질문을 올리면 담임·교감·교장선생님 등이 직접 답합니다. 학생회 회의 등으로 소통 창구를 넓히겠습니다.</div>
+          <div class="row"><span class="more"><span class="open-t">학교 답변 자세히 보기 ▼</span><span class="close-t">접기 ▲</span></span><span class="badge s-run">운영 중</span></div>
+        </summary>
+        <div class="answer"><p>2학년 교무실 앞에 <b>'질문게시판'</b>이 있습니다. '학교에 묻는다'와 '학교가 답한다'로 구성되어 있으며, 학생들이 질문을 올리면 담임선생님, 교감·교장선생님 등 해당하는 분들이 답을 달아 주십니다.</p><p>부족한 점이 있다면 학생회 회의 등을 통해 소통 창구를 더 넓힐 수 있도록 노력하겠습니다.</p><p>1학년은 밴드에 학년부장 교사의 전화번호가 안내되어 있습니다. 연락 주시면 담임선생님들과 협의해 말씀드리겠습니다.</p></div>
+      </details><details class="qa" open style="--accent:var(--pink);--tint:var(--pink-bg)">
+        <summary>
+          <div class="qline"><span class="qmark">Q</span><span class="qtext">학년부장선생님의 업무가 너무 과중해 걱정이 됩니다. 다른 선생님들께서 좀 도와주시면 좋겠습니다.</span></div>
+          <div class="key"><b>핵심답변</b>학년 내 업무를 더 나누고 비담임 교사도 함께 돕도록 하며, 내년도 업무분장 개편에서 주요 검토사항으로 반영하겠습니다.</div>
+          <div class="row"><span class="more"><span class="open-t">학교 답변 자세히 보기 ▼</span><span class="close-t">접기 ▲</span></span><span class="badge s-review">검토 중</span></div>
+        </summary>
+        <div class="answer"><p>학년부장의 역할이 매우 중요하고, 그만큼 업무가 과중하다는 점을 인식하고 있습니다. 학년단 안에서 기획선생님을 필두로 모든 담임선생님들이 각자 업무를 맡아 학년을 잘 꾸려 가고 있습니다.</p><p>학년부장님께 업무가 몰리지 않도록 담임선생님들과 업무를 더 나누고, 비담임선생님들도 담임선생님을 도와 업무를 조금이나마 줄일 수 있도록 노력하겠습니다. <b>내년도 업무분장 개편 과정에서도 주요 검토사항으로 반영</b>하겠습니다.</p></div>
+      </details>
+  </section><section class="cat" data-cat="credit" id="cat-credit">
+    <div class="cat-h"><span class="ico" style="background:var(--green-bg)">📚</span><h2>선택과목·고교학점제</h2><small>질문 3개</small></div>
+    <details class="qa" open style="--accent:var(--green);--tint:var(--green-bg)">
+        <summary>
+          <div class="qline"><span class="qmark">Q</span><span class="qtext">고교학점제로 인한 내년도 교과 선택에 대한 걱정이 큽니다. 특히 진로가 결정되지 않아 어떤 과목을 선택해야 하는지 상담도 절실합니다.</span></div>
+          <div class="key"><b>핵심답변</b>담임선생님과 선택과목 상담을 3회 이상 진행했습니다. 진로가 정해지지 않아도 괜찮으며, 담임·진로 선생님 상담은 언제든 가능합니다.</div>
+          <div class="row"><span class="more"><span class="open-t">학교 답변 자세히 보기 ▼</span><span class="close-t">접기 ▲</span></span><span class="badge s-run">운영 중</span></div>
+        </summary>
+        <div class="answer"><p>불안한 마음과 걱정 모두 충분히 이해합니다. 선택과목 상담은 담임선생님들께서 <b>3회 이상</b> 진행하셨습니다.</p><p>진로가 아직 정해지지 않아도 괜찮습니다. 자신의 흥미와 강점을 알고 계열을 탐색해 선택과목을 정하지만, 앞으로 진로가 바뀔 수도 있어 과목을 정하는 데 고민이 많으실 것입니다.</p><p>문의사항이 있으시면 학교에 상담을 요청해 주십시오. 담임선생님, 진로담당 선생님 등과의 상담은 <b>언제든 가능</b>합니다. 부담 없이 연락 주시면 친절하게 상담드리겠습니다.</p></div>
+      </details><details class="qa" open style="--accent:var(--green);--tint:var(--green-bg)">
+        <summary>
+          <div class="qline"><span class="qmark">Q</span><span class="qtext">위 질문과 연결하여, 혹시 내년도 선택 교과 신청 인원을 알 수 있을까요?</span></div>
+          <div class="key"><b>핵심답변</b>신청 기간 중 인원을 공개하면 학생들의 선택에 영향을 줄 수 있고 최종 편성 과정에서 변동도 있어, 중간 현황은 공개하지 않습니다.</div>
+          <div class="row"><span class="more"><span class="open-t">학교 답변 자세히 보기 ▼</span><span class="close-t">접기 ▲</span></span></div>
+        </summary>
+        <div class="answer"><p>선택 교과 신청 인원은 신청 기간 중에 공개할 경우 학생들의 선택에 영향을 줄 수 있고, 최종 편성 과정에서 인원이 달라질 수 있어 중간 현황은 공개하지 않습니다.</p><p>성적도 중요하지만, 진로와 연결된 교과 선택이 더 중요하다고 봅니다. 학생의 진로(학과, 넓게는 계열)에 맞는 교과를 용기 있게 신청해 성실하게 이수하고, 그 과정에서 생긴 질문과 호기심, 탐구 과정과 결과를 유기적으로 연결하는 것이 더 의미 있습니다.</p></div>
+      </details><details class="qa" open style="--accent:var(--green);--tint:var(--green-bg)">
+        <summary>
+          <div class="qline"><span class="qmark">Q</span><span class="qtext">2학년 학생 수가 너무 적어진 것 같습니다. 고교학점제로 자퇴생이 많아지는 추세라는 뉴스가 들리는데, 우리 학교는 어떠한지 궁금합니다.</span></div>
+          <div class="key"><b>핵심답변</b>2학년은 150명이 입학했고 지금까지 전학·유학·학업유예·자퇴 등 13명의 학적변동이 있었습니다. 담임선생님들이 정서 지원과 상담에 적극적으로 임하고 있습니다.</div>
+          <div class="row"><span class="more"><span class="open-t">학교 답변 자세히 보기 ▼</span><span class="close-t">접기 ▲</span></span><span class="badge s-run">운영 중</span></div>
+        </summary>
+        <div class="answer"><p>2학년은 작년에 <b>150명</b>이 입학하였습니다. 지금까지 전학, 유학, 부적응, 학업유예, 자퇴 등 <b>13명</b>의 학적변동이 있었습니다. 학적변동의 사유는 학생마다 다양하여, 이를 고교학점제의 영향이라고 단정하기는 어렵습니다.</p><p>입시가 가까워짐에 따라 학생들의 걱정과 근심도 커질 것이라 생각합니다. 담임선생님들께서는 학생들의 정서 지원을 위해 적극적으로 상담하고 있습니다.</p><p>혹시 자녀의 불안이 너무 크거나 혼란스러움이 심하다면 언제든지 학교에 연락 주십시오. 학생들의 정서적 건강을 돕기 위해 최선을 다하겠습니다.</p></div>
+      </details>
+  </section><section class="cat" data-cat="career" id="cat-career">
+    <div class="cat-h"><span class="ico" style="background:var(--violet-bg)">🌱</span><h2>진로탐구·성장</h2><small>질문 2개</small></div>
+    <details class="qa" open style="--accent:var(--violet);--tint:var(--violet-bg)">
+        <summary>
+          <div class="qline"><span class="qmark">Q</span><span class="qtext">진로가 정해진 학생들은 어떻게 코칭해 주시는지 궁금합니다.</span></div>
+          <div class="key"><b>핵심답변</b>선택과목 상담(3회 이상), 다양한 진로체험, 졸업생 멘토링을 운영하며, 상담을 통해 '진로 → 과목 → 독서·체험 → 탐구 → 발표·보고서'로 구체화하도록 돕습니다.</div>
+          <div class="row"><span class="more"><span class="open-t">학교 답변 자세히 보기 ▼</span><span class="close-t">접기 ▲</span></span><span class="badge s-run">운영 중</span></div>
+        </summary>
+        <div class="answer"><p>1학년 때부터 담임선생님, 진로선생님과 함께 <b>3회 이상 선택과목 상담</b>을 실시합니다.</p><p>또한 다음과 같은 활동을 진행하고 있습니다.<ul><li>진로체험활동: 큐브위성 체험, 농생명 대학 체험, 신약개발 참여, 경찰서 방문 등</li><li>연말 진로활동지 작성</li><li>본교 졸업생 방문 멘토-멘티 활동</li></ul></p><p>진로는 <b>진로 확인 → 선택과목 결정 → 관련 독서·체험 → 수행평가 등을 통한 교과·진로 탐구 → 발표·보고서 작성</b>의 흐름으로 구체화할 수 있습니다. 학생들과의 상담을 통해 탐구 활동을 구체화하고, 이를 바탕으로 학생의 배움과 진로 탐색이 충실히 이어지도록 돕겠습니다.</p></div>
+      </details><details class="qa" open style="--accent:var(--violet);--tint:var(--violet-bg)">
+        <summary>
+          <div class="qline"><span class="qmark">Q</span><span class="qtext">자녀의 진로와 관심 분야를 깊이 탐구할 수 있는 본교의 프로그램에 대해 안내 부탁드립니다.</span></div>
+          <div class="key"><b>핵심답변</b>1·2학년 대상 '질문하는 학교' 선도학교 프로그램을 공강 시간에 운영합니다. 진로 독서 → 질문 만들기·확장·공유 → 탐구 보고서 작성·발표로 이어집니다.</div>
+          <div class="row"><span class="more"><span class="open-t">학교 답변 자세히 보기 ▼</span><span class="close-t">접기 ▲</span></span><span class="badge s-run">운영 중</span></div>
+        </summary>
+        <div class="answer"><p>본교는 올해 1·2학년을 대상으로 <b>'질문하는 학교'</b> 사업을 운영하고 있으며, 선도학교 프로그램을 공강 시간을 활용해 진행하고 있습니다.</p><p>진로와 관련된 책을 읽은 뒤 질문을 만들고, 이를 확장해 서로 공유합니다. 그리고 이를 진로와 연결해 탐구 보고서를 작성하고 발표합니다. 학생의 실제 참여와 활동 과정은 학교생활기록부 기재 지침에 따라 기록됩니다.</p><p>학생들의 질문 수준이 점차 높아지는 것을 느끼고 있으며, 이를 통해 학생들이 스스로를 더 잘 이해하고 진로를 깊이 고민할 수 있기를 기대합니다.</p></div>
+      </details>
+  </section><section class="cat" data-cat="admission" id="cat-admission">
+    <div class="cat-h"><span class="ico" style="background:var(--orange-bg)">🎯</span><h2>진학·수능</h2><small>질문 4개</small></div>
+    <details class="qa" open style="--accent:var(--orange);--tint:var(--orange-bg)">
+        <summary>
+          <div class="qline"><span class="qmark">Q</span><span class="qtext">고등학교 3학년을 앞두고 있으니 진학에 대한 걱정이 큽니다. 본교의 진학 전략 및 상담 계획에 대해 안내 부탁드립니다.</span></div>
+          <div class="key"><b>핵심답변</b>내년 2월 학생 상담을 시작으로 3월 학부모 상담, 6월 평가원 모의평가 후 상담, 8월 수시 원서 상담을 진행합니다. 필요하면 언제든 상담할 수 있습니다.</div>
+          <div class="row"><span class="more"><span class="open-t">학교 답변 자세히 보기 ▼</span><span class="close-t">접기 ▲</span></span><span class="badge s-plan">예정</span></div>
+        </summary>
+        <div class="answer"><p><b>3학년 진학상담 일정</b><ul><li>2월: 새 3학년 담임선생님과 학생 상담 — 내신·모의고사 성적을 바탕으로 대입상담프로그램을 활용한 진학 전략 수립</li><li>3월: 학부모 상담</li><li>6월: 평가원 모의평가 후 학생·학부모 상담</li><li>8월: 수시 원서 작성을 위한 학생·학부모 상담</li></ul></p><p>이 밖에도 필요하면 수시로 상담할 수 있으니, 궁금하신 점은 적극적으로 문의해 주십시오. 성심껏 답변드리겠습니다.</p></div>
+      </details><details class="qa" open style="--accent:var(--orange);--tint:var(--orange-bg)">
+        <summary>
+          <div class="qline"><span class="qmark">Q</span><span class="qtext">내년 수능부터는 수능 체제가 달라지는데, 이에 대응하여 수능 최저를 맞추기 위해 어떤 계획을 세우고 계신지 궁금합니다.</span></div>
+          <div class="key"><b>핵심답변</b>매주 월요일 주초고사, 수학 고난도 문항 분석·풀이, 토요모의고사반을 운영합니다. 겨울방학에는 통합사회·통합과학 대비 방과후학교를 계획하고 있습니다.</div>
+          <div class="row"><span class="more"><span class="open-t">학교 답변 자세히 보기 ▼</span><span class="close-t">접기 ▲</span></span><span class="badge s-run">운영 중</span></div>
+        </summary>
+        <div class="answer"><p>학생들이 수능에 익숙해질 수 있도록 다음 프로그램을 운영합니다.<ul><li>매주 월요일 주초고사</li><li>수학 고난도 문항 분석·풀이 프로그램</li><li>토요모의고사반</li><li>1학년 때부터 공강 시간 등을 활용한 영어 듣기 연습</li></ul></p><p>3학년이 되면 교육청 모의고사 외에 사설 모의고사도 응시하며, <b>겨울방학에는 통합사회·통합과학 대비 방과후학교</b> 개설을 계획하고 있습니다.</p></div>
+      </details><details class="qa" open style="--accent:var(--orange);--tint:var(--orange-bg)">
+        <summary>
+          <div class="qline"><span class="qmark">Q</span><span class="qtext">대입을 위해 가장 중점적으로 준비해야 할 것은 무엇인가요? 내신과 수능 준비를 어떻게 균형 있게 해 나가면 좋을지 궁금합니다.</span></div>
+          <div class="key"><b>핵심답변</b>내신과 수능은 서로 보완하는 관계입니다. 평소에는 수업과 복습으로 개념을 다지고, 시험·수행평가 기간에는 내신 비중을 높이며, 모의고사로 취약 영역을 점검하는 것이 좋습니다.</div>
+          <div class="row"><span class="more"><span class="open-t">학교 답변 자세히 보기 ▼</span><span class="close-t">접기 ▲</span></span></div>
+        </summary>
+        <div class="answer"><p>내신 준비와 수능 준비는 뚜렷하게 구분되지 않습니다. 둘은 서로 보완하는 관계이므로, 평소 수업에 적극적으로 참여하고 자기주도학습에 성실히 임하면 함께 잘 준비할 수 있습니다.</p><p><b>시기별 균형 잡기</b><ul><li>평상시: 수업을 열심히 듣고 복습으로 기본 개념을 탄탄히 합니다. 기본은 수능을 바탕으로 합니다.</li><li>내신 시험·수행평가 기간: 내신의 비중을 높여 최선을 다합니다.</li><li>모의고사 후: 수능 준비가 적절한지 스스로 판단하고, 취약한 영역을 분석해 보완합니다.</li></ul></p><p>학기 중에는 수업·독서·탐구·발표 활동에 충실하고, 학기 말에는 자신의 활동과 배움을 돌아보며 보완할 점을 확인하는 것이 좋습니다.</p></div>
+      </details><details class="qa" open style="--accent:var(--orange);--tint:var(--orange-bg)">
+        <summary>
+          <div class="qline"><span class="qmark">Q</span><span class="qtext">본교 졸업생들의 학종 진학 비율이 궁금합니다.</span></div>
+          <div class="key"><b>핵심답변</b>본교 작년 졸업생 중 수시로 4년제 대학에 최종 등록한 학생 기준, 교과전형 약 75%, 종합전형 약 25%입니다.</div>
+          <div class="row"><span class="more"><span class="open-t">학교 답변 자세히 보기 ▼</span><span class="close-t">접기 ▲</span></span></div>
+        </summary>
+        <div class="answer"><p><b>본교 진학 현황</b><br>작년 졸업생 중 수시로 4년제 대학에 최종 등록한 학생을 기준으로, <b>교과전형 약 75%, 종합전형 약 25%</b>가 진학하였습니다.</p><p><b>참고: 전국 대학 모집 비율</b><br>대학의 모집 인원 기준으로 보면, 수도권은 교과전형 31.9%·종합전형 44.2%, 비수도권은 교과전형 67.7%·종합전형 22.7%, 전체로는 교과전형 56.4%·종합전형 29.5%를 모집합니다.</p><p><span class='note'>※ 위 두 수치는 성격이 다른 통계입니다. 본교 수치는 '실제 진학한 학생' 기준이고, 전국 수치는 '대학이 모집하는 인원' 기준입니다.</span></p></div>
+      </details>
+  </section></main>
+
+  <div class="box">
+    <h3>추가 문의 안내</h3>
+    <ul>
+      <li>여러 학부모님께 함께 안내드릴 수 있는 내용은 밴드 댓글로 질문해 주셔도 됩니다.</li>
+      <li>학생 개인의 성적·진로·학적·상담·학교생활에 관한 사항은 개인정보 보호를 위해 <b>담임교사 또는 담당 교사에게 개별로</b> 문의해 주시기 바랍니다.</li>
+    </ul>
+  </div>
+
+
+  <footer>창원경일고등학교</footer>
+</div>
+
+<button class="top" id="topBtn" type="button" aria-label="맨 위로">↑</button>
+
+<script>
+// 핵심 내용은 HTML에 직접 들어 있어 JavaScript가 실행되지 않아도 모두 읽을 수 있습니다.
+// JavaScript는 필터, 접기/펼치기, 맨 위로 이동 같은 편의 기능만 담당합니다.
+const chips = document.getElementById("chips");
+const list = document.getElementById("list");
+
+// 일반 브라우저에서는 처음에 질문을 접어 간결하게 보여 줍니다.
+// iPhone 파일 미리보기처럼 JavaScript가 실행되지 않는 환경에서는 open 속성이 남아 전체 답변이 보입니다.
+list.querySelectorAll("details.qa").forEach(d => d.open = false);
+
+chips.addEventListener("click", e=>{
+  const b = e.target.closest(".chip"); if(!b) return;
+  const cat = b.dataset.cat;
+  chips.querySelectorAll(".chip").forEach(x=>x.setAttribute("aria-pressed", x===b));
+  list.querySelectorAll("section.cat").forEach(s=>{ s.hidden = !(cat==="all" || s.dataset.cat===cat); });
+  const nav = document.querySelector("nav.cats");
+  if (nav) window.scrollTo({top: Math.max(0, nav.offsetTop - 4), behavior:"smooth"});
+});
+
+const toggleBtn = document.getElementById("toggleAll");
+toggleBtn.addEventListener("click", ()=>{
+  const ds = [...list.querySelectorAll("details.qa")].filter(d => !d.closest('section.cat').hidden);
+  const shouldOpen = ds.some(d => !d.open);
+  ds.forEach(d=>d.open = shouldOpen);
+  toggleBtn.textContent = shouldOpen ? "모두 접기" : "모두 펼치기";
+});
+
+window.addEventListener("beforeprint", ()=>list.querySelectorAll("details.qa").forEach(d=>d.open=true));
+
+const topBtn = document.getElementById("topBtn");
+window.addEventListener("scroll", ()=>topBtn.classList.toggle("show", window.scrollY > 600), {passive:true});
+topBtn.addEventListener("click", ()=>window.scrollTo({top:0, behavior:"smooth"}));
+</script>
+</body>
+</html>
